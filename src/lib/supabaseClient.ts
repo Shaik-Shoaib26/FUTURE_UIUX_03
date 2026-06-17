@@ -30,7 +30,7 @@ export async function saveBooking(booking: BookingPayload) {
   return await supabase.from('bookings').insert([{
     event_type: booking.eventType,
     event_date: booking.dateStr,
-    guest_count: Number(booking.guests),
+    guest_count: booking.guests,
     name: booking.name,
     email: booking.email,
     phone: booking.phone,
