@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ChevronRight, ChevronLeft } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
+import { submitBooking } from '../lib/bookingService';
 
 export default function BookConsultation() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     eventType: '',
@@ -14,14 +17,25 @@ export default function BookConsultation() {
     phone: '',
     notes: ''
   });
-  
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
 
   const handleNext = () => setStep(prev => Math.min(prev + 1, 5));
   const handleBack = () => setStep(prev => Math.max(prev - 1, 1));
-  const submitForm = () => {
-    setIsSubmitted(true);
-    // Real implementation would submit data here
+
+  const submitForm = async () => {
+    setSubmissionError('');
+    setIsSubmitting(true);
+
+    try {
+      await submitBooking(formData);
+      navigate('/booking-success', { state: { booking: formData } });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Booking submission failed. Please try again.';
+      setSubmissionError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const updateForm = (key: string, value: string) => {
@@ -37,32 +51,6 @@ export default function BookConsultation() {
       default: return true;
     }
   };
-
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen pt-32 pb-24 flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white dark:bg-slate-900 p-12 rounded-3xl shadow-xl text-center max-w-lg w-full border border-slate-100 dark:border-slate-800"
-        >
-          <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={40} />
-          </div>
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Request Received!</h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-            Thank you, {formData.name}. We've received your consultation request for your upcoming {formData.eventType.toLowerCase()}. Our team will contact you within 24 hours to confirm a time.
-          </p>
-          <button 
-            onClick={() => window.location.href = '/'}
-            className="w-full py-4 bg-purple-700 text-white rounded-xl font-bold transition-colors hover:bg-purple-800"
-          >
-            Return Home
-          </button>
-        </motion.div>
-      </div>
-    );
-  }
 
   return (
     <div className="pt-32 pb-24 min-h-screen bg-slate-50 dark:bg-slate-950">
@@ -224,12 +212,25 @@ export default function BookConsultation() {
                         </div>
                       </div>
                       
-                      <button 
-                        onClick={submitForm}
-                        className="w-full py-4 bg-purple-700 hover:bg-purple-800 text-white rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2"
-                      >
-                        Submit Request <CheckCircle2 size={20} />
-                      </button>
+                      <div className="space-y-4">
+                        {submissionError ? (
+                          <div className="rounded-3xl border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/40 p-4 text-left text-sm text-red-700 dark:text-red-300">
+                            <strong>Submission error:</strong> {submissionError}
+                          </div>
+                        ) : null}
+                        <button 
+                          onClick={submitForm}
+                          disabled={isSubmitting}
+                          className={twMerge(
+                            "w-full py-4 rounded-xl font-bold text-lg transition-colors flex items-center justify-center gap-2",
+                            isSubmitting
+                              ? 'bg-slate-300 text-slate-700 cursor-not-allowed dark:bg-slate-700 dark:text-slate-300'
+                              : 'bg-purple-700 hover:bg-purple-800 text-white'
+                          )}
+                        >
+                          {isSubmitting ? 'Sending booking...' : 'Submit Request'} <CheckCircle2 size={20} />
+                        </button>
+                      </div>
                     </motion.div>
                   )}
 

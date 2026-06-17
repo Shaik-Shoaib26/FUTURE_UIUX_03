@@ -9,6 +9,7 @@ import About from './pages/About';
 import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import BookConsultation from './pages/BookConsultation';
+import BookingSuccess from './pages/BookingSuccess';
 import DesignRationale from './pages/DesignRationale';
 import EventDetail from './pages/EventDetail';
 
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="pricing" element={<Pricing />} />
           <Route path="contact" element={<Contact />} />
           <Route path="book" element={<BookConsultation />} />
+          <Route path="booking-success" element={<BookingSuccess />} />
           <Route path="design-rationale" element={<DesignRationale />} />
           <Route path="event/:id" element={<EventDetail />} />
         </Route>
