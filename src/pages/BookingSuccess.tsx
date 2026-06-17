@@ -158,9 +158,9 @@ export default function BookingSuccess() {
                     <Mail size={24} className="text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">Confirmation emails sent</h3>
+                    <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">Booking received</h3>
                     <p className="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
-                      A booking confirmation has been sent to <strong>{booking.email}</strong> and our team at <strong>{SUPPORT_EMAIL}</strong> has been notified. We'll be in touch shortly.
+                      Your booking has been saved and our team at <strong>{SUPPORT_EMAIL}</strong> has been notified. We'll be in touch shortly.
                     </p>
                   </div>
                 </div>
