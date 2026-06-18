@@ -25,7 +25,7 @@ export default function DesignRationale() {
            <h2 className="text-slate-900 dark:text-white mt-12">3. Strategic UX Decisions</h2>
            <ul className="list-disc pl-6 space-y-3">
              <li><strong>Visual Hierarchy:</strong> The homepage uses alternating layout rhythms (centered text, then grids, then asymmetrical process sections) to keep the eye engaged without fatigue.</li>
-             <li><strong>Conversion Funnel:</strong> The multi-step "Book Consultation" form replaces a traditional, intimidating long-form contact page. By chunking the booking process (Event Type → Date → Guests → Budget), cognitive load is decreased, significantly boosting completion rates (the "Foot in the Door" technique).</li>
+             <li><strong>Conversion Funnel:</strong> The multi-step "Book Consultation" form replaces a traditional, intimidating long-form contact page. By chunking the booking process (Event Type → Date → Guests → Budget → Contact Details), cognitive load is decreased, significantly boosting completion rates (the "Foot in the Door" technique).</li>
              <li><strong>Dark Mode Utility:</strong> Event imagery often pops beautifully against dark backgrounds. We implemented a first-class dark mode (which leans into a deep slate rather than pure black) to elevate the "nightlife/gala" aesthetic when toggled.</li>
              <li><strong>Sticky Navigation with State:</strong> The navbar transitions from transparent (blending into the hero image) to a frosted glassmorphism effect on scroll, ensuring wayfinding is always accessible without eating screen real estate.</li>
            </ul>

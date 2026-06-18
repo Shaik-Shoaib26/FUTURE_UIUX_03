@@ -1,17 +1,16 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { CheckCircle2, Mail, Phone, Calendar, Users, ArrowLeft, ExternalLink } from 'lucide-react';
 import { useLocation, Link } from 'react-router-dom';
-import { twMerge } from 'tailwind-merge';
 
 interface BookingData {
   eventType: string;
   dateStr: string;
   guests: string;
+  budget: string;
   name: string;
   email: string;
   phone: string;
-  notes: string;
 }
 
 const SUPPORT_EMAIL = import.meta.env.VITE_BUSINESS_EMAIL || 'shaikshoaib436@gmail.com';
@@ -96,6 +95,10 @@ export default function BookingSuccess() {
                         {booking.guests}
                       </p>
                     </div>
+                    <div>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Budget</p>
+                      <p className="text-slate-900 dark:text-white font-medium">{booking.budget || 'Not specified'}</p>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -134,18 +137,6 @@ export default function BookingSuccess() {
                   </div>
                 </motion.div>
               </div>
-
-              {booking.notes && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 p-6 mb-8"
-                >
-                  <h3 className="font-semibold text-slate-900 dark:text-white text-sm uppercase tracking-wider mb-3">Additional Notes</h3>
-                  <p className="text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">{booking.notes}</p>
-                </motion.div>
-              )}
 
               <motion.div
                 initial={{ opacity: 0, y: 10 }}

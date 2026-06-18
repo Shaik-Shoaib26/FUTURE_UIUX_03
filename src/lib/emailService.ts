@@ -8,29 +8,19 @@ export interface OwnerBookingNotificationPayload extends Record<string, unknown>
   event_type: string;
   event_date: string;
   guest_count: string;
-  budget_notes: string;
   customerName: string;
   customerEmail: string;
   customerPhone: string;
   eventType: string;
   eventDate: string;
   guestCount: string;
-  budgetNotes: string;
-  client_name: string;
-  client_email: string;
-  client_phone: string;
-  client_notes: string;
-  contact_name: string;
-  contact_email: string;
-  contact_phone: string;
+  budget: string;
   name: string;
   email: string;
   phone: string;
   mail: string;
   customer_mail: string;
   phone_number: string;
-  budget: string;
-  notes: string;
   message: string;
   formatted_message: string;
   formattedMessage: string;
@@ -60,7 +50,6 @@ function isConfigured(): boolean {
 
 export function buildOwnerBookingNotificationPayload(booking: BookingPayload): OwnerBookingNotificationPayload {
   const customerPhone = booking.phone || 'Not provided';
-  const budgetNotes = booking.notes || 'No budget/notes provided';
   const formattedMessage = [
     `Customer Name: ${booking.name}`,
     `Customer Email: ${booking.email}`,
@@ -68,7 +57,7 @@ export function buildOwnerBookingNotificationPayload(booking: BookingPayload): O
     `Event Type: ${booking.eventType}`,
     `Event Date: ${booking.dateStr}`,
     `Guest Count: ${booking.guests}`,
-    `Budget/Notes: ${budgetNotes}`,
+    `Budget: ${booking.budget || 'Not specified'}`,
   ].join('\n');
 
   return {
@@ -78,29 +67,19 @@ export function buildOwnerBookingNotificationPayload(booking: BookingPayload): O
     event_type: booking.eventType,
     event_date: booking.dateStr,
     guest_count: booking.guests,
-    budget_notes: budgetNotes,
+    budget: booking.budget || 'Not specified',
     customerName: booking.name,
     customerEmail: booking.email,
     customerPhone,
     eventType: booking.eventType,
     eventDate: booking.dateStr,
     guestCount: booking.guests,
-    budgetNotes,
-    client_name: booking.name,
-    client_email: booking.email,
-    client_phone: customerPhone,
-    client_notes: budgetNotes,
-    contact_name: booking.name,
-    contact_email: booking.email,
-    contact_phone: customerPhone,
     name: booking.name,
     email: booking.email,
     phone: customerPhone,
     mail: booking.email,
     customer_mail: booking.email,
     phone_number: customerPhone,
-    budget: budgetNotes,
-    notes: budgetNotes,
     message: formattedMessage,
     formatted_message: formattedMessage,
     formattedMessage,

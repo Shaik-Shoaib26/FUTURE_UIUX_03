@@ -15,10 +15,10 @@ export interface BookingPayload {
   eventType: string;
   dateStr: string;
   guests: string;
+  budget: string;
   name: string;
   email: string;
   phone: string;
-  notes: string;
 }
 
 export { supabase };
@@ -34,7 +34,7 @@ export async function saveBooking(booking: BookingPayload) {
     name: booking.name,
     email: booking.email,
     phone: booking.phone,
-    budget: booking.notes,
+    budget: booking.budget,
     created_at: new Date().toISOString(),
   }]);
 }
