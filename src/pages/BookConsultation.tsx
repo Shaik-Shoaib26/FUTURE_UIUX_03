@@ -90,7 +90,7 @@ export default function BookConsultation() {
                   <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">What type of event are you planning?</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {['Wedding', 'Corporate Event', 'Milestone Birthday', 'Private Party', 'Product Launch', 'Other'].map((type) => (
+                      {['Wedding', 'Corporate Event', 'Milestone Birthday', 'Private Party', 'Product Launch', 'Engagement Ceremonies'].map((type) => (
                         <div 
                           key={type}
                           onClick={() => updateForm('eventType', type)}
