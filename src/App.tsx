@@ -325,22 +325,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 8. Final CTA */}
-      <section className="py-32 relative overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 w-full h-full">
-           <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Footer Background" className="w-full h-full object-cover opacity-10 grayscale mix-blend-luminosity" />
-        </div>
-        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-            <h2 className="text-5xl md:text-7xl font-serif font-light italic text-white mb-6">Ready to create<br/>something beautiful?</h2>
-            <p className="text-lg text-slate-400 mb-12 max-w-2xl mx-auto font-light">Schedule a complimentary consultation with our planning team to discuss your next event.</p>
-            <Link 
-              to="/book" 
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] uppercase tracking-[0.2em] font-bold transition-all"
-            >
-              Start Planning
-            </Link>
-        </div>
-      </section>
+
 
     </div>
   );
